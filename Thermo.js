@@ -4,10 +4,10 @@ var chart_w = 80;
 var stepX = 77 / 14;
 
 var chart_1_y = [
-  15, 25, 40, 30, 45, 40, 35, 55, 37, 50, 60, 45,70, 78
+  30, 30, 35, 30, 30, 30, 80.0, 10, 30, 30, 35, 40, 35, 30, 30
 ];
 var chart_2_y = [
-  80, 65, 65, 40, 55, 34, 54, 50, 60, 64, 55, 27, 24, 30
+  49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 35, 35
 ];
 
 function point(x, y) {
@@ -34,16 +34,11 @@ function drawGrid(graph) {
         g.add(horizontalLine);
     };
 }
-drawGrid('#chart-2');
-drawGrid('#chart-1');
-
 function drawLineGraph(graph, points, container, id) {
 
+    drawGrid("#chart-" + id);
 
     var graph = Snap(graph);
-
-
-    /*END DRAW GRID*/
 
     /* PARSE POINTS */
     var myPoints = [];
@@ -249,8 +244,6 @@ function drawCircle(container,id,progress,parent){
 }
 
 $(window).on('load',function(){
-    drawCircle('#chart-3',1,77,'#circle-1');
-    drawCircle('#chart-4',2,53,'#circle-2');
     drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
     drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
 });

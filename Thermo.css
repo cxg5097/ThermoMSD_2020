@@ -112,10 +112,11 @@ body {
 }
 
 .charts-container {
-  padding: 20px;
+  margin: auto;
   width: 100%;
-  max-width: 1024px;
-  display: inline-block;
+  max-width: 3024px;
+  display: flex;
+  flex-direction: column;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -152,7 +153,9 @@ body {
 
 .title {
   font-size: 22px;
-  margin-bottom: 12px;
+  margin-bottom: 17px;
+  text-decoration: underline;
+  text-decoration-style: wavy;
 }
 
 .chart-circle {
@@ -275,42 +278,4 @@ body {
  */
 .cf {
   *zoom: 1;
-}
-
-/*IRRELEVANT CSS*/
-.followlinks {
-  position: fixed;
-  right: 35px;
-  bottom: 15px;
-  display: table;
-}
-.followlinks a {
-  display: table-cell;
-  vertical-align: middle;
-  padding-left: 10px;
-  color: white;
-}
-.followlinks a svg path {
-  fill: white;
-}
-
-.heartIt {
-  margin-top: 50px;
-  margin-bottom: 80px;
-}
-.heartIt p {
-  font-size: 24px;
-  line-height: 40px;
-}
-.heartIt img {
-  width: 64px;
-  height: auto;
-  opacity: 0.7;
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-}
-
-.original {
-  color: #ef6670;
-  font-size: 14px;
 }
