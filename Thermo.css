@@ -4,7 +4,12 @@
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/176026/ProximaNova-Regular.otf);
   font-weight: 300;
 }
-body, html {
+
+/*Background styling */
+body {
+  background-color: #24303a;
+  color: white;
+  text-align: center;
   font-family: Lato;
 }
 
@@ -21,12 +26,25 @@ h1 p {
   font-size: 22px;
 }
 
+/*Styling for the position of monitor box */
+.charts-container {
+  margin: auto;
+  width: 100%;
+  max-width: 3024px;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* What does this do???
 #grid {
   -moz-transform: translate(1px, 0px);
   -ms-transform: translate(1px, 0px);
   -webkit-transform: translate(1px, 0px);
   transform: translate(1px, 0px);
-}
+}*/
 
 /* GRAPH - 1 */
 #graph-1 {
@@ -49,15 +67,17 @@ h1 p {
   -moz-animation: lineani 1.3s linear forwards;
   -webkit-animation: lineani 1.3s linear forwards;
   animation: lineani 1.3s linear forwards;
+  background-color:#ef6670;
 }
 
+/*Shadding option under the graph*/
 #poly-1 {
   fill: url(#gradient-3);
 }
 
 #poly-2 {
   fill: url(#gradient-4);
-}
+} 
 
 @-moz-keyframes lineani {
   to {
@@ -74,54 +94,9 @@ h1 p {
     stroke-dashoffset: 0;
   }
 }
-.underlay {
-  stroke-width: 5;
-  fill: transparent;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: #24303a;
-}
 
-#circle-graph-1 {
-  stroke: url(#gradient-1);
-  stroke-width: 5;
-  fill: transparent;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
-.chart-circle {
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-#circle-graph-2 {
-  stroke: url(#gradient-2);
-  stroke-width: 5;
-  fill: transparent;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-body {
-  background-color: #24303a;
-  color: white;
-  text-align: center;
-}
-
-.charts-container {
-  margin: auto;
-  width: 100%;
-  max-width: 3024px;
-  display: flex;
-  flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
+/* Need to change the time axis label to be test-aling: right*/
 .chart {
   color: #4a667a;
   text-align: left;
@@ -135,72 +110,103 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 10px;
-  padding: 15px 20px 65px 20px;
+  padding: 5px 0px 10px 20px;
 }
-.chart.circle {
-  padding: 15px 20px 40px 20px;
+
+.chart1{
+  color: #4a667a;
+  text-align: left;
+  position: relative;
+  height: auto;
+  background-color: #1e2730;
+  display: inline-block;
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 5px 0px 10px 20px;
+  margin: auto;
+  width: 100%;
+  max-width: 3024px;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+.chart2{
+  color: #4a667a;
+  text-align: left;
+  position: relative;
+  height: auto;
+  background-color: #1e2730;
+  display: inline-block;
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 5px 0px 10px 20px;
+  margin: auto;
+  width: 100%;
+  max-width: 3024px;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 700px) {
-  .chart {
+  .chart2 {
+    width: calc(100% - 20px);
+  }
+  .chart1 {
     width: calc(100% - 20px);
   }
 }
 @media screen and (min-width: 700px) {
-  .chart {
+  .chart2 {
+    width: calc(50% - 20px);
+  }
+  .chart1 {
     width: calc(50% - 20px);
   }
 }
 
+/*Styling of the monitor title label */
 .title {
-  font-size: 22px;
+  font-size: 25px;
   margin-bottom: 17px;
   text-decoration: underline;
   text-decoration-style: wavy;
-}
-
-.chart-circle {
-  display: inline-block;
-  position: relative;
 }
 
 .chart-svg {
   position: relative;
 }
 
-.circle-percentage {
-  position: absolute;
-  color: white;
-  font-size: 48px;
-  left: 50%;
-  top: 50%;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-@media screen and (max-width: 480px) {
-  .circle-percentage {
-    font-size: 32px;
-  }
-}
-
-.align-center {
-  text-align: center;
-}
-
+/* Changes grid size within monitor box*/
 .chart-line {
   width: 80%;
 }
 
+/*Styling for the 'time' label*/
 .valueX {
   font-size: 14px;
+  text-align: center;
 }
 
+/*Styling for the graph value */
 .chart-values {
   text-align: right;
-  font-size: 18px;
+  font-size: 20px;
   position: absolute;
-  right: 0;
+  right: 2%;
   bottom: 0;
   padding: 15px;
 }
