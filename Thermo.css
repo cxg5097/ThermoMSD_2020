@@ -41,6 +41,10 @@ h1 {
   transform: translate(1px, 0px);
 }*/
 
+.alarm_style{
+  background-color: red;
+}
+
 /*Hear Rate Vital Monitor container*/
 .chart1{
   background-color: #222a2e;
@@ -48,23 +52,16 @@ h1 {
   text-align: center;
   position: relative;
   height: auto;
-  display: inline-block;
   width: 50%;
   max-width: 3024px;
   padding: 5px 0px 10px 20px;
   margin: 10px;
-  margin-top: 0px;
-
   float: left;
-  position: relative;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 /*Hear Rate Vital Monitor container*/
 
@@ -75,25 +72,16 @@ h1 {
   text-align: center;
   position: relative;
   height: auto;
-  display: inline-block;
   width: 50%;
   max-width: 3024px;
   padding: 5px 0px 10px 20px;
   margin: 10px;
-  margin-top: 0px;
-
-  
- 
   float: left;
-  position: relative;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 /*Tempurature Vital Monitor container*/
 
@@ -104,22 +92,16 @@ h1 {
   text-align: center;
   position: relative;
   height: auto;
-  display: inline-block;
   width: 50%;
   max-width: 3024px;
   padding: 5px 0px 10px 20px;
   margin: 10px;
-
   float: left;
-  position: relative;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 /*O2 Vital Monitor container*/
 
@@ -130,22 +112,16 @@ h1 {
   text-align: center;
   position: relative;
   height: auto;
-  display: inline-block;
   width: 50%;
   max-width: 3024px;
   padding: 5px 0px 10px 20px;
   margin: 10px;
-
   float: left;
-  position: relative;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 /*Resp Vital Monitor container*/
 
@@ -297,14 +273,14 @@ h1 {
   padding: 15px;
 }
 
-.h-value {
+.current-value {
   -moz-transition: ease-in-out 700ms;
   -o-transition: ease-in-out 700ms;
   -webkit-transition: ease-in-out 700ms;
   transition: ease-in-out 700ms;
   opacity: 0;
 }
-.h-value.visible {
+.current-value.visible {
   opacity: 1;
 }
 
