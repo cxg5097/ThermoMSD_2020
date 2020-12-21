@@ -1,34 +1,22 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-@font-face {
-  font-family: Lato;
-  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/176026/ProximaNova-Regular.otf);
-  font-weight: 300;
-}
-
 /*Background styling */
 body {
-  background-color: #24303a;
+  background-color: #26363b;
   color: white;
   text-align: center;
-  font-family: Lato;
+  font-family: "Trebuchet MS", Helvetics, sans-serif;
 }
+/*Background styling*/
 
+/*Font styling*/
 h1 {
-  font-size: 28px;
+  font-size: 40px;
   line-height: 40px;
   margin-top: 20px;
 }
-h1 a {
-  text-decoration: none;
-  color: #48c15e;
-}
-h1 p {
-  font-size: 22px;
-}
+/*Font styling*/
 
-/*Styling for the position of monitor box */
-.charts-container {
-  margin: auto;
+/*Styling for the position of monitor box*/
+.chart-container {
   width: 100%;
   max-width: 3024px;
   display: flex;
@@ -36,6 +24,13 @@ h1 p {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+/*Styling for the position of monitor box */
+
+/*Styling of the monitor title label */
+.title {
+  font-size: 25px;
+  margin-bottom: 17px;
 }
 
 /* What does this do???
@@ -46,7 +41,115 @@ h1 p {
   transform: translate(1px, 0px);
 }*/
 
-/* GRAPH - 1 */
+/*Hear Rate Vital Monitor container*/
+.chart1{
+  background-color: #222a2e;
+  color: #f8f8f8;
+  text-align: center;
+  position: relative;
+  height: auto;
+  display: inline-block;
+  width: 50%;
+  max-width: 3024px;
+  padding: 5px 0px 10px 20px;
+  margin: 10px;
+  margin-top: 0px;
+
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*Hear Rate Vital Monitor container*/
+
+/*Tempurature Vital Monitor container*/
+.chart2{
+  background-color: #222a2e;
+  color: #f8f8f8;
+  text-align: center;
+  position: relative;
+  height: auto;
+  display: inline-block;
+  width: 50%;
+  max-width: 3024px;
+  padding: 5px 0px 10px 20px;
+  margin: 10px;
+  margin-top: 0px;
+
+  
+ 
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*Tempurature Vital Monitor container*/
+
+/*02 Vital Monitor container*/
+.chart3{
+  background-color: #222a2e;
+  color: #f8f8f8;
+  text-align: center;
+  position: relative;
+  height: auto;
+  display: inline-block;
+  width: 50%;
+  max-width: 3024px;
+  padding: 5px 0px 10px 20px;
+  margin: 10px;
+
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*O2 Vital Monitor container*/
+
+/*Resp Vital Monitor container*/
+.chart4{
+  background-color: #222a2e;
+  color: #f8f8f8;
+  text-align: center;
+  position: relative;
+  height: auto;
+  display: inline-block;
+  width: 50%;
+  max-width: 3024px;
+  padding: 5px 0px 10px 20px;
+  margin: 10px;
+
+  float: left;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*Resp Vital Monitor container*/
+
+/* Heart Rate line graph */
 #graph-1 {
   stroke: url(#gradient-1);
   stroke-width: 1.5;
@@ -57,7 +160,9 @@ h1 p {
   -webkit-animation: lineani 1.3s linear forwards;
   animation: lineani 1.3s linear forwards;
 }
+/* Heart Rate line graph */
 
+/* Tempurature line graph */
 #graph-2 {
   stroke: url(#gradient-2);
   stroke-width: 1.5;
@@ -69,15 +174,54 @@ h1 p {
   animation: lineani 1.3s linear forwards;
   background-color:#ef6670;
 }
+/* Tempurature line graph */
+
+/* O2 Sat line graph */
+#graph-3 {
+  stroke: url(#gradient-3);
+  stroke-width: 1.5;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  -moz-animation: lineani 1.3s linear forwards;
+  -webkit-animation: lineani 1.3s linear forwards;
+  animation: lineani 1.3s linear forwards;
+  background-color:#ef6670;
+}
+/* O2 Sat line graph */
+
+/* Resp Rate line graph */
+#graph-4 {
+  stroke: url(#gradient-4);
+  stroke-width: 1.5;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  -moz-animation: lineani 1.3s linear forwards;
+  -webkit-animation: lineani 1.3s linear forwards;
+  animation: lineani 1.3s linear forwards;
+  background-color:#ef6670;
+}
+/* Resp Rate line graph */
 
 /*Shadding option under the graph*/
 #poly-1 {
-  fill: url(#gradient-3);
+  fill: url(#gradient-1b);
 }
 
 #poly-2 {
-  fill: url(#gradient-4);
+  fill: url(#gradient-2b);
 } 
+
+#poly-3 {
+  fill: url(#gradient-3b);
+}
+
+#poly-4 {
+  fill: url(#gradient-4b);
+}
+/*Shadding option under the graphs*/
+
 
 @-moz-keyframes lineani {
   to {
@@ -96,72 +240,15 @@ h1 p {
 }
 
 
-/* Need to change the time axis label to be test-aling: right*/
-.chart {
-  color: #4a667a;
-  text-align: left;
-  position: relative;
-  height: auto;
-  background-color: #1e2730;
-  display: inline-block;
-  float: left;
-  position: relative;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 10px;
-  padding: 5px 0px 10px 20px;
-}
 
-.chart1{
-  color: #4a667a;
-  text-align: left;
-  position: relative;
-  height: auto;
-  background-color: #1e2730;
-  display: inline-block;
-  float: left;
-  position: relative;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 10px;
-  padding: 5px 0px 10px 20px;
-  margin: auto;
-  width: 100%;
-  max-width: 3024px;
-  display: flex;
-  flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.chart2{
-  color: #4a667a;
-  text-align: left;
-  position: relative;
-  height: auto;
-  background-color: #1e2730;
-  display: inline-block;
-  float: left;
-  position: relative;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 10px;
-  padding: 5px 0px 10px 20px;
-  margin: auto;
-  width: 100%;
-  max-width: 3024px;
-  display: flex;
-  flex-direction: column;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 @media screen and (max-width: 700px) {
+  .chart4 {
+    width: calc(100% - 20px);
+  }
+  .chart3 {
+    width: calc(100% - 20px);
+  }
   .chart2 {
     width: calc(100% - 20px);
   }
@@ -170,6 +257,12 @@ h1 p {
   }
 }
 @media screen and (min-width: 700px) {
+  .chart4 {
+    width: calc(50% - 20px);
+  }
+  .chart3 {
+    width: calc(50% - 20px);
+  }
   .chart2 {
     width: calc(50% - 20px);
   }
@@ -178,13 +271,6 @@ h1 p {
   }
 }
 
-/*Styling of the monitor title label */
-.title {
-  font-size: 25px;
-  margin-bottom: 17px;
-  text-decoration: underline;
-  text-decoration-style: wavy;
-}
 
 .chart-svg {
   position: relative;
@@ -220,27 +306,6 @@ h1 p {
 }
 .h-value.visible {
   opacity: 1;
-}
-
-.percentage-value {
-  -moz-transition: ease-in-out 700ms;
-  -o-transition: ease-in-out 700ms;
-  -webkit-transition: ease-in-out 700ms;
-  transition: ease-in-out 700ms;
-  color: #48c15e;
-  margin-top: 2px;
-  opacity: 0;
-}
-.percentage-value.negative {
-  color: #ef6670;
-}
-.percentage-value.visible {
-  opacity: 1;
-}
-
-.total-gain {
-  color: white;
-  font-size: 48px;
 }
 
 .triangle {

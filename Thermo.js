@@ -10,6 +10,15 @@ var chart_2_y = [
   49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 35, 35
 ];
 
+var chart_3_y = [
+  44, 44, 42, 42, 43, 43, 42, 42, 41, 43, 43, 43, 43
+];
+
+var chart_4_y = [
+  60, 58, 55, 62, 55, 65, 60, 60, 58, 65, 60, 60, 55
+];
+
+
 function point(x, y) {
     x: 0;
     y: 0;
@@ -246,4 +255,6 @@ function drawCircle(container,id,progress,parent){
 $(window).on('load',function(){
     drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
     drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
+    drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
+    drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
 });
