@@ -1,19 +1,39 @@
 
-var chart_h = 40;
-var chart_w = 80;
-var stepX = 77 / 14;
+var chart_h = 40; /* Need to change dynamically with monitor settings*/
+var chart_w = 80; /* Need to change dynamically with monitor settings*/
+var stepX = 82 / 14; /* Need to change dynamically with monitor settings*/
 
+/*Data Import - Need to change to real data aquisition eventually */
 var chart_1_y = [
   30, 30, 35, 30, 30, 30, 80.0, 10, 30, 30, 35, 40, 35, 30, 30
 ];
 var chart_2_y = [
-  49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 35, 35
+  49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 34, 34, 34, 34
 ];
+
+var chart_3_y = [
+  44, 44, 42, 42, 43, 43, 42, 42, 41, 43, 43, 43, 43
+];
+
+var chart_4_y = [
+  60, 58, 55, 62, 55, 65, 60, 60, 58, 65, 60, 60, 55
+];
+/*Data Import - Need to change to real data aquisition eventually */
+
+/*Diaply value on monitors */
+var disp_HR = chart_1_y[chart_1_y.length - 1];
+var disp_Temp = chart_2_y[chart_2_y.length - 1];
+var disp_O2 = chart_3_y[chart_3_y.length - 1];
+var disp_RR = chart_4_y[chart_4_y.length - 1];
+/* Display values on monitors */
 
 function point(x, y) {
     x: 0;
     y: 0;
 }
+
+
+
 /* DRAW GRID */
 function drawGrid(graph) {
     var graph = Snap(graph);
@@ -34,10 +54,10 @@ function drawGrid(graph) {
         g.add(horizontalLine);
     };
 }
+
+
 function drawLineGraph(graph, points, container, id) {
-
     drawGrid("#chart-" + id);
-
     var graph = Snap(graph);
 
     /* PARSE POINTS */
@@ -81,94 +101,40 @@ function drawLineGraph(graph, points, container, id) {
         });
     }
 
-    function calculatePercentage(points, graph) {
-        var initValue = points[0];
-        var endValue = points[points.length - 1];
-        var sum = endValue - initValue;
+    function ValueDelay(graph) {
+        var cVal = $(graph).find('.current-value');
+         /* Delay before vital values are displayed*/ 
+        setTimeout(function () {
+            cVal.addClass('visible');
+        }, 0);
+        /* Delay before vital values are displayed*/    
+    }
+
+    var initValue = points[0];
+    var endValue = points[points.length - 1];
+    var sum = endValue - initValue;
+    var stepCount = 1300 / sum;
+
+    function count(graph, sum) {
         var prefix;
-        var percentageGain;
-        var stepCount = 1300 / sum;
-
-        function findPrefix() {
-            if (sum > 0) {
-                prefix = "+";
-            } else {
-                prefix = "";
-            }
-        }
-
-        var percentagePrefix = "";
-
-        function percentageChange() {
-            percentageGain = initValue / endValue * 100;
-            
-            if(percentageGain > 100){
-              console.log('over100');
-              percentageGain = Math.round(percentageGain * 100*10) / 100;
-            }else if(percentageGain < 100){
-              console.log('under100');
-              percentageGain = Math.round(percentageGain * 10) / 10;
-            }
-            if (initValue > endValue) {
-              
-                percentageGain = endValue/initValue*100-100;
-                percentageGain = percentageGain.toFixed(2);
-              
-                percentagePrefix = "";
-                $(graph).find('.percentage-value').addClass('negative');
-            } else {
-                percentagePrefix = "+";
-            }
-          if(endValue > initValue){
-              percentageGain = endValue/initValue*100;
-              percentageGain = Math.round(percentageGain);
-          }
-        };
-        percentageChange();
-        findPrefix();
-
-        var percentage = $(graph).find('.percentage-value');
         var totalGain = $(graph).find('.total-gain');
-        var hVal = $(graph).find('.h-value');
-
-        function count(graph, sum) {
-            var totalGain = $(graph).find('.total-gain');
-            var i = 0;
-            var time = 1300;
-            var intervalTime = Math.abs(time / sum);
-            var timerID = 0;
-            if (sum > 0) {
-                var timerID = setInterval(function () {
-                    i++;
-                    totalGain.text(percentagePrefix + i);
-                    if (i === sum) clearInterval(timerID);
-                }, intervalTime);
+        var i = 0;
+        var time = 1300;
+        var intervalTime = Math.abs(time / sum);
+        var timerID = 0;
+        if (sum > 0) {
+            var timerID = setInterval(function () { 
+                i++;
+                if (i === sum) clearInterval(timerID);
+            }, intervalTime);
             } else if (sum < 0) {
                 var timerID = setInterval(function () {
                     i--;
-                    totalGain.text(percentagePrefix + i);
                     if (i === sum) clearInterval(timerID);
                 }, intervalTime);
-            }
         }
-        count(graph, sum);
-
-        percentage.text(percentagePrefix + percentageGain + "%");
-        totalGain.text("0%");
-        setTimeout(function () {
-            percentage.addClass('visible');
-            hVal.addClass('visible');
-        }, 1300);
-
     }
-
-
-    function showValues() {
-        var val1 = $(graph).find('.h-value');
-        var val2 = $(graph).find('.percentage-value');
-        val1.addClass('visible');
-        val2.addClass('visible');
-    }
+    count(graph, sum);
 
     function drawPolygon(segments, id) {
         var lastel = segments[segments.length - 1];
@@ -189,61 +155,41 @@ function drawLineGraph(graph, points, container, id) {
         }, 1300, mina.linear);
     }
 
-      parseData(points);
-      
-      createSegments(myPoints);
-      calculatePercentage(points, container);
-      joinLine(segments,id);
- 
-      drawPolygon(segments, id);
-    
+    parseData(points);
+    createSegments(myPoints);
+    ValueDelay(container);
+    joinLine(segments,id);
+    drawPolygon(segments, id);
+}
 
-    /*$('#poly-'+id).attr('class','show');*/
+/* Alarm threshol definition - Should use user input */
+var max_Temp = 37.5;
+var min_Temp = 35.8;
+var max_HR = 450;
+var min_HR= 300;
+var max_O2 = 98;
+var min_02 = 97;
+var max_RR = 65;
+var min_RR = 55;
+/* Alarm threshol definition*/
 
-    /* function drawPolygon(segments,id){
-      var polySeg = segments;
-      polySeg.push([80,40],[0,40]);
-      var polyLine = segments.join(' ').toString();
-      var replacedString = polyLine.replace(/L/g,'').replace(/M/g,"");
-      var poly = graph.polygon(replacedString);
-      poly.attr('id','poly-'+id)
+function alarm(points) {
+    for (i = 0; i < points.length; i++) {
+        var d = chart_2_y[i];
+        console.log(d);
+        if (min_Temp < d < max_Temp) {   
+        } else {
+            console.log(10);
+            document.chart2.style.backgroundColor = 'red';
+        }
     }
-    drawPolygon(segments,id);*/
 }
-function drawCircle(container,id,progress,parent){
-  var paper = Snap(container);
-  var prog = paper.path("M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50");
-  var lineL = prog.getTotalLength();
-  var oneUnit = lineL/100;
-  var toOffset = lineL - oneUnit * progress;
-  var myID = 'circle-graph-'+id;
-  prog.attr({
-    'stroke-dashoffset':lineL,
-    'stroke-dasharray':lineL,
-    'id':myID
-  });
-  
-  var animTime = 1300/*progress / 100*/
-  
-  prog.animate({
-    'stroke-dashoffset':toOffset
-  },animTime,mina.easein);
-  
-  function countCircle(animtime,parent,progress){
-    var textContainer = $(parent).find('.circle-percentage');
-    var i = 0;
-    var time = 1300;
-    var intervalTime = Math.abs(time / progress);
-    var timerID = setInterval(function () {
-      i++;
-      textContainer.text(i+"%");
-      if (i === progress) clearInterval(timerID);
-    }, intervalTime);           
-  }
-  countCircle(animTime,parent,progress);
-}
+
+ alarm(chart_2_y);
 
 $(window).on('load',function(){
     drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
     drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
+    drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
+    drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
 });
