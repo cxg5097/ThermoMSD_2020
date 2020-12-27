@@ -326,3 +326,59 @@ h1 {
 .cf {
   *zoom: 1;
 }
+
+
+
+
+
+/* Below is the CSS for setup_screen*/
+
+.ButtonsOnSetup {
+  text-decoration: none;
+  color: #f8f8f8;
+  font-size: 40px;
+  text-align: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  line-height: 600px;  /* Need to make automatic but not working*/
+  border: 5px solid white;
+}
+
+.startbutton {
+  text-decoration: none;
+}
+
+a.selected {
+  background-color:#1F75CC;
+  color:white;
+  z-index:100;
+}
+
+.setup {
+  background-color:#FFFFFF;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: 15px;
+  position:absolute;
+  text-align:left;
+  width:394px;
+  z-index:50;
+  padding: 25px 25px 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 3px;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
+.setup p, .setup.div {
+  border-bottom: 1px solid #EFEFEF;
+  margin: 8px 0;
+  padding-bottom: 8px;
+  color: black;
+}
+
+
