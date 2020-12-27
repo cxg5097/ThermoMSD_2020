@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+	<title></title>
+	<link rel="stylesheet" href="Thermo.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
+	<script src="Thermo.js"></script>
+</head>
+
+<body>
+	<div class="setup pop">
+    	<form method="post" id="new_message" action="/messages">
+        	<p><label for="Name">Experiment Title</label><input type="text" size="30" name="name" id="name" /></p>
+       		<p><label for="Monitor_number">How many monitors</label><input type="text" size="10" name="number" id="number"></input></p>
+       		<p><form>
+       			<label for = "Monitor_size">Select monitor size</label>
+       				<input type="radio" name="sizes" id="sizes"><label for="S">Small</label><br>
+       				<input type="radio" name="sizes" id="sizes"><label for ="M">Medium</label><br>
+       				<input type="radio" name="sizes" id="sizes"><label for ="L">Large</label>
+       			</form></p>
+        	<p><input type="submit" value="Save Settings" name="commit" id="message_submit"> and <a href="Thermo.html" class = "startbutton">Start Experiment</a></p>
+        	<input type="reset" value="Clear all Fields">
+    	</form>
+	</div>
+
+	<div >
+		<a href = "/contact" class = "ButtonsOnSetup" id = "contact"> New Experiment</a>
+		<a href = "/" class = "ButtonsOnSetup" id = "load_past_exp"> Load Experiment</a>
+	</div>
+</body>
