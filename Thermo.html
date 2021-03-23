@@ -5,10 +5,11 @@
 	<link rel="stylesheet" href="Thermo.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
-	<script src="Thermo.js"></script>
+	<script type="text/javascript" src="Thermo.js"></script>
+	
 </head>
 
-<body>
+<body onload = "javascript:AutoRefresh(5000)"">
 <!-- Page Header --> 
 	<h1>Prototype Vitals Monitor<br></h1>
 	<!-- CSS ref for the margins of vital monitors --> 
@@ -36,14 +37,14 @@
 							<stop offset="0" stop-color="rgba(0, 213, 189, 1)" stop-opacity="0.07" />
 							<stop offset="0.5" stop-color="rgba(0, 213, 189, 1)" stop-opacity="0.13" />
 							<stop offset="1" stop-color="rgba(0, 213, 189, 1)" stop-opacity="0" />
-							</linearGradient>
+						</linearGradient>
 					</defs>
 				</svg>
 				<h3 class="valueX">time</h3> <!-- Need to change based  on graph!!!!!-->
 				
 				<div class="chart-values">
 					<p class="current-value">
-						<script> document.write(disp_HR)</script>
+				<!--		<script> document.write(disp_HR)</script> -->
 					</p> 
 				</div>
 
@@ -79,7 +80,7 @@
 				
 				<div class="chart-values">
 					<p class="current-value">
-						<script> document.write(disp_Temp)</script>
+				<!--		<script> document.write(disp_Temp)</script> -->
 					</p>
 				</div>
 				
@@ -114,7 +115,7 @@
 				
 				<div class="chart-values">
 					<p class="current-value">
-						<script> document.write(disp_O2)</script>
+				<!--		<script> document.write(disp_O2)</script> -->
 					</p>
 				</div>
 				
@@ -150,7 +151,7 @@
 				
 				<div class="chart-values">
 					<p class="current-value">
-						<script> document.write(disp_RR)</script>
+					<!--	<script> document.write(disp_RR)</script> -->
 					</p>
 				</div>
 				<div class="triangle green"></div>

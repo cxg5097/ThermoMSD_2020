@@ -1,5 +1,58 @@
+console.log("Accessing Server")
+
+var volt;
+
+fetch('http://192.168.1.202:31415/get_result')
+  .then(response => response.json())  
+  .then(json_temp => volt = json_temp.voltage)
+
+
+function AutoRefresh(t){
+    setTimeout("location.reload(true);", t);
+}
+
+function waitForElement(){
+    if(typeof volt !== "undefined"){
+        console.log(volt);
+        monitors();
+    }
+    else{
+        setTimeout(waitForElement, 250);
+        console.log(volt);
+    }
+}
+
+
 
 /* Below is the code for the setup screen*/
+var initialnumbermonitor = 0;
+var maxnumbermonitor = 4;
+
+
+function DuplicateMonitors() {
+    initialnumbermonitor = initialnumbermonitor + 1;
+    if (initialnumbermonitor < maxnumbermonitor) {
+        var monitordata = document.querySelector('.monitorRepeates');
+        var monitorclone = monitordata.cloneNode(true);
+        monitordata.after(monitorclone);
+    }    
+}
+
+/*let monitorObject = [];
+
+function ExtracData() {
+    let allMonitors = document.querySelectorAll('.monitorRepeates');
+    for(let i = 0; i < allMonitors.length; i++) {
+    // Wasn't sure what would happen to a temp variable so I just did this instead
+    monitorObjects.push(new Object());
+    
+    monitorObjects[i].monitorsize = allMonitors[i].querySelector(#monitorsize).value;
+    // other data code goes here...
+    // ...
+  }
+*/
+
+
 function deselect(e) {
   $('.pop').slideFadeToggle(function() {
     e.removeClass('selected');
@@ -28,20 +81,29 @@ $.fn.slideFadeToggle = function(easing, callback) {
 };
 
 
-
 /* Below is the code for the monitors*/
 function monitors() {
     var chart_h = 40; /* Need to change dynamically with monitor settings*/
     var chart_w = 80; /* Need to change dynamically with monitor settings*/
     var stepX = 82 / 14; /* Need to change dynamically with monitor settings*/
 
+    volt = volt.map(function(element) {
+        return 1.5*((element*100)-50);
+    });
+
+
     /*Data Import - Need to change to real data aquisition eventually */
+
     var chart_1_y = [
       30, 30, 35, 30, 30, 30, 80.0, 10, 30, 30, 35, 40, 35, 30, 30
     ];
-    var chart_2_y = [
+
+    /* Temp chart: focus here*/
+    var chart_2_y = volt;
+
+    /*[
       49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 34, 34, 34, 34
-    ];
+    ];*/
 
     var chart_3_y = [
       44, 44, 42, 42, 43, 43, 42, 42, 41, 43, 43, 43, 43
@@ -51,6 +113,12 @@ function monitors() {
       60, 58, 55, 62, 55, 65, 60, 60, 58, 65, 60, 60, 55
     ];
     /*Data Import - Need to change to real data aquisition eventually */
+
+    // draw graphs
+    drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
+    drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
+    drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
+    drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
 
     /*Diaply value on monitors */
     var disp_HR = chart_1_y[chart_1_y.length - 1];
@@ -101,7 +169,7 @@ function monitors() {
                 var p = new point();
                 var pv = points[i] / 100 * 40;
                 p.x = 83.7 / points.length * i + 1;
-                p.y = 40 - pv;
+                p.y = 30 - pv;
                 if (p.x > 78) {
                     p.x = 78;
                 }
@@ -208,7 +276,6 @@ function monitors() {
     function alarm(points) {
         for (i = 0; i < points.length; i++) {
             var d = chart_2_y[i];
-            console.log(d);
             if (min_Temp < d < max_Temp) {   
             } else {
                 console.log(10);
@@ -218,15 +285,8 @@ function monitors() {
     }
 
      alarm(chart_2_y);
-
-    $(window).on('load',function(){
-        drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
-        drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
-        drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
-        drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
-    });
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-    monitors();
+    waitForElement();
 });

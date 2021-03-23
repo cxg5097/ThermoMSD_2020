@@ -10,15 +10,27 @@
 
 <body>
 	<div class="setup pop">
-    	<form method="post" id="new_message" action="/messages">
-        	<p><label for="Name">Experiment Title</label><input type="text" size="30" name="name" id="name" /></p>
-       		<p><label for="Monitor_number">How many monitors</label><input type="text" size="10" name="number" id="number"></input></p>
-       		<p><form>
-       			<label for = "Monitor_size">Select monitor size</label>
-       				<input type="radio" name="sizes" id="sizes"><label for="S">Small</label><br>
-       				<input type="radio" name="sizes" id="sizes"><label for ="M">Medium</label><br>
-       				<input type="radio" name="sizes" id="sizes"><label for ="L">Large</label>
-       			</form></p>
+    	<form method="post" id="dynamicInput" action="/messages">
+        	Experiment Title<br><input type="text" size="30" name="name" id="name" />
+       		<br><br><br>
+       		<div class = "monitorRepeates">
+       			Select monitor name  <Select name="monitorname" id="monitorname"><br>
+	       			<option value="Temp">Tempurature</option>
+	       			<option value="HR">Heart Rate</option>
+	       			<option value="BR">Breathing Rate</option>
+	       			<option value="O2">O2 Saturation</option></Select>
+	       		<br><br>
+	       		Select monitor size  <Select name="monitorsize" id="monitorsize"><br>
+	       			<option value="Large">Large</option>
+	       			<option value="Medium">Medium</option>
+	       			<option value="Small">Small</option></Select>
+	       		<br><br>
+	       		Minimum Threshold<br><input type="text">
+	       		<br><br>
+	       		Maximum Threshold<br><input type="text">
+	       		<br><br><br>
+	       	</div>	
+	       	<input type="button" value="Add monitor" onclick="DuplicateMonitors()"><br><br> 
         	<p><input type="submit" value="Save Settings" name="commit" id="message_submit"> and <a href="Thermo.html" class = "startbutton">Start Experiment</a></p>
         	<input type="reset" value="Clear all Fields">
     	</form>

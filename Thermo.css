@@ -15,6 +15,12 @@ h1 {
 }
 /*Font styling*/
 
+/*Set up box*/
+.setup{
+  color: black;
+}
+/*Set up box*/
+
 /*Styling for the position of monitor box*/
 .chart-container {
   width: 100%;
@@ -42,10 +48,21 @@ h1 {
 }*/
 
 .alarm_style{
-  background-color: red;
+  color: #fff;
+  animation: blinkingBackground 2s infinite;
 }
 
-/*Heart Rate Vital Monitor container*/
+@keyframes blinkingBackground{
+  0%  {background-color: red}
+  50% {background-color: #222a2e}
+  100% {background-color: red}
+}
+
+.Large{
+
+
+}
+/*Hear Rate Vital Monitor container*/
 .chart1{
   background-color: #222a2e;
   color: #f8f8f8;
@@ -63,7 +80,7 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-/*Heart Rate Vital Monitor container*/
+/*Hear Rate Vital Monitor container*/
 
 /*Tempurature Vital Monitor container*/
 .chart2{
