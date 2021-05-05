@@ -9,11 +9,13 @@
 </head>
 
 <body>
+	<!-- Code for the set up page-->
 	<div class="setup pop">
     	<form method="post" id="dynamicInput" action="/messages">
-        	Experiment Title<br><input type="text" size="30" name="name" id="name" />
-       		<br><br><br>
-       		<div class = "monitorRepeates">
+        	Experiment Title<br><input type="text" size="30" name="name" id="ExperimentTitle" />
+       		<br><br>
+       		<p>Please use Celcius, beats per minute, or %O2 Sat</p><br>
+       		<div class = "monitorRepeates" id="1">
        			Select monitor name  <Select name="monitorname" id="monitorname"><br>
 	       			<option value="Temp">Tempurature</option>
 	       			<option value="HR">Heart Rate</option>
@@ -25,13 +27,13 @@
 	       			<option value="Medium">Medium</option>
 	       			<option value="Small">Small</option></Select>
 	       		<br><br>
-	       		Minimum Threshold<br><input type="text">
+	       		Minimum Alarm Threshold<br><input type="text">
 	       		<br><br>
-	       		Maximum Threshold<br><input type="text">
+	       		Maximum Alarm Threshold<br><input type="text">
 	       		<br><br><br>
 	       	</div>	
 	       	<input type="button" value="Add monitor" onclick="DuplicateMonitors()"><br><br> 
-        	<p><input type="submit" value="Save Settings" name="commit" id="message_submit"> and <a href="Thermo.html" class = "startbutton">Start Experiment</a></p>
+        	<p><input type="button" value="Save Settings" name="commit" id="message_submit" onclick="SaveAllUserInput()"> and <a href="Thermo.html" class = "startbutton">Start Experiment</a></p>
         	<input type="reset" value="Clear all Fields">
     	</form>
 	</div>

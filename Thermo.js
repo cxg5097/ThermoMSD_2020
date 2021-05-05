@@ -1,19 +1,28 @@
+
 console.log("Accessing Server")
 
 var volt;
+var time;
 
-fetch('http://192.168.1.202:31415/get_result')
-  .then(response => response.json())  
-  .then(json_temp => volt = json_temp.voltage)
+var iLoveCanada;
+var CoolestCat;
 
+function getData(){
+    fetch('http://192.168.1.202:31415/get_result')
+       .then(response => response.json())  
+       .then(json_temp => [volt = json_temp.voltage, time = json_temp.time])
+}
+
+getData();
 
 function AutoRefresh(t){
-    setTimeout("location.reload(true);", t);
+    setTimeout("location.reload(true);", t)
 }
 
 function waitForElement(){
     if(typeof volt !== "undefined"){
         console.log(volt);
+        console.log(time);
         monitors();
     }
     else{
@@ -21,8 +30,6 @@ function waitForElement(){
         console.log(volt);
     }
 }
-
-
 
 /* Below is the code for the setup screen*/
 var initialnumbermonitor = 0;
@@ -32,25 +39,82 @@ var maxnumbermonitor = 4;
 function DuplicateMonitors() {
     initialnumbermonitor = initialnumbermonitor + 1;
     if (initialnumbermonitor < maxnumbermonitor) {
-        var monitordata = document.querySelector('.monitorRepeates');
-        var monitorclone = monitordata.cloneNode(true);
-        monitordata.after(monitorclone);
+        var monitordata = document.querySelectorAll('.monitorRepeates');
+        var monitorclone = monitordata[0].cloneNode(true);
+        monitorclone.id = (initialnumbermonitor + 1); // give a unique id
+        monitordata[monitordata.length - 1].after(monitorclone);
     }    
 }
 
-/*let monitorObject = [];
-
-function ExtracData() {
-    let allMonitors = document.querySelectorAll('.monitorRepeates');
-    for(let i = 0; i < allMonitors.length; i++) {
-    // Wasn't sure what would happen to a temp variable so I just did this instead
-    monitorObjects.push(new Object());
+function SaveAllUserInput() {
+    // find all the monitors by class
+    var numOfMonitors = document.querySelectorAll('.monitorRepeates');
+    var saveTitle = document.querySelector("#ExperimentTitle").value;
+    // create an array for saving the data to the local storage
+    var saveData = [];
     
-    monitorObjects[i].monitorsize = allMonitors[i].querySelector(#monitorsize).value;
-    // other data code goes here...
-    // ...
-  }
-*/
+    // find each individual monitor data and store it as an object
+    for (let i = 0; i <  numOfMonitors.length; i++){
+        var newMonitorDataObject = GetData(numOfMonitors[i]);
+        saveData.push(newMonitorDataObject);
+    }
+    // prints out the save data
+    console.log(saveData);
+    SaveAllDataToLocalStorage(saveData, saveTitle);
+}
+
+// this method grabs all the data for each individual monitor 
+function GetData(monitorData){
+     var newMonitorData = {
+        id: monitorData.id, // unique id 
+        name:  monitorData.childNodes[1].value, // the selected monitorname
+        monitorsize: monitorData.childNodes[6].value, // the selected monitorsize
+        minAlarmThreshold:  monitorData.childNodes[12].value, // the selected min alarm 
+        maxAlarmThreshold: monitorData.childNodes[18].value, // the selected max alarm 
+    };
+    return newMonitorData;
+}
+
+// this method saves the data to local storage 
+// so it get pulled into the Thermo.html to dynamically set the monitor inputs
+function SaveAllDataToLocalStorage(saveData, saveTitle){
+    localStorage.setItem('saveCristinasMonitorData', JSON.stringify(saveData)); 
+    localStorage.setItem('saveCristinasMonitorExperimentTitle', JSON.stringify(saveTitle)); 
+}
+/* End of code for the setup_screen */
+
+// This method pulls the monitor data from local storage to be used in thermo html
+// * note this values need to be uniquely named to avoid being overwritten by other programs using local storage
+function PullMonitorDataFromLocalStorage(){
+    // Then to retrieve it from the store and convert to an object again
+    var saveCristinasMonitorData = JSON.parse(localStorage.getItem('saveCristinasMonitorData'));
+    return saveCristinasMonitorData;
+}
+// This method pulls the title from local storage to be used in thermo html
+function PullExperimentTitleFromLocalStorage(){
+    var saveCristinasMonitorExperimentTitle = JSON.parse(localStorage.getItem('saveCristinasMonitorExperimentTitle'));
+    return saveCristinasMonitorExperimentTitle;
+}
+
+// This method sets the page with all of the input 
+function SetDataOnPage(){
+    // set title on page
+    document.querySelector("h1").innerHTML = PullExperimentTitleFromLocalStorage();
+
+    // set data for monitor
+    var multMonitorsData = PullMonitorDataFromLocalStorage();
+    for(let j = 0; j < multMonitorsData.length; j++){
+        // create a graph using the properties?
+        // set the title for each graph
+        var chartTitle = document.querySelector(".chart" + (j + 1 ) + " h2"); // ex. ".chart1 h2"
+        chartTitle.innerText = multMonitorsData[j].name;
+        // var monitorsize = multMonitorsData[j].monitorsize; // how does the size affect the graphs and their points?
+        // var minAlarmThreshold = multMonitorsData[j].minAlarmThreshold; // set the min alarm threshold here and later pull that info in another method that will is constantly updated?
+        // var maxAlarmThreshold = multMonitorsData[j].maxAlarmThreshold; // set the min alarm threshold here and later pull that info in another method that will is constantly updated?
+        
+    }
+}
+
 
 
 function deselect(e) {
@@ -93,17 +157,13 @@ function monitors() {
 
 
     /*Data Import - Need to change to real data aquisition eventually */
-
+    
     var chart_1_y = [
       30, 30, 35, 30, 30, 30, 80.0, 10, 30, 30, 35, 40, 35, 30, 30
     ];
 
     /* Temp chart: focus here*/
     var chart_2_y = volt;
-
-    /*[
-      49, 49, 49, 42, 49, 42, 42, 42, 42, 38, 35, 34, 34, 34, 34
-    ];*/
 
     var chart_3_y = [
       44, 44, 42, 42, 43, 43, 42, 42, 41, 43, 43, 43, 43
@@ -112,15 +172,48 @@ function monitors() {
     var chart_4_y = [
       60, 58, 55, 62, 55, 65, 60, 60, 58, 65, 60, 60, 55
     ];
-    /*Data Import - Need to change to real data aquisition eventually */
+    /* Data Import - Need to change to real data aquisition eventually */
 
-    // draw graphs
-    drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
-    drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
-    drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
-    drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
+    // Draw graphs
+   //drawLineGraph('#chart-1', chart_1_y, '#graph-1-container', 1);
+    //drawLineGraph('#chart-2', chart_2_y, '#graph-2-container', 2);
+    //drawLineGraph('#chart-3', chart_3_y, '#graph-3-container', 3);
+    //drawLineGraph('#chart-4', chart_4_y, '#graph-4-container', 4);
 
-    /*Diaply value on monitors */
+    var dps = [];
+    var chart = new CanvasJS.Chart("chart-1", {
+        data: [{
+            type:"line",
+            dataPoints: dps
+        }]
+    });
+
+    var updateInterval = 100;
+    var dataLength = 10;
+    var time_start = time[0];
+   
+    var updateChart = function (count){
+        getData();
+        count = time.length;
+
+        for(var ind = 0; ind < count; ind++){
+        current_time = time[ind] - time_start
+       
+            dps.push({
+                x:  current_time,
+                y: volt[ind]
+            });
+
+        }
+
+        chart.render();
+        dps = [];
+    }
+
+    updateChart(dataLength);
+    setInterval(function(){updateChart()}, updateInterval);
+
+    /* Display value on monitors */
     var disp_HR = chart_1_y[chart_1_y.length - 1];
     var disp_Temp = chart_2_y[chart_2_y.length - 1];
     var disp_O2 = chart_3_y[chart_3_y.length - 1];
@@ -135,8 +228,8 @@ function monitors() {
 
 
     /* DRAW GRID */
-    function drawGrid(graph) {
-        var graph = Snap(graph);
+    function drawGrid(graphToSet) {
+        var graph = Snap(graphToSet);
         var g = graph.g();
         g.attr('id', 'grid');
         for (i = 0; i <= stepX + 2; i++) {
@@ -147,11 +240,11 @@ function monitors() {
             g.add(horizontalLine);
         };
         for (i = 0; i <= 14; i++) {
-            var horizontalLine = graph.path(
+            var verticalLine = graph.path(
                 "M" + stepX * i + "," + 38.7 + " " +
                 "L" + stepX * i + "," + 0)
-            horizontalLine.attr('class', 'vertical');
-            g.add(horizontalLine);
+            verticalLine.attr('class', 'vertical');
+            g.add(verticalLine);
         };
     }
 
@@ -272,21 +365,52 @@ function monitors() {
     var max_RR = 65;
     var min_RR = 55;
     /* Alarm threshol definition*/
+// HER: Old Method, Remove if the method below works with your data
+//    function alarm(points) {
+//        for (i = 0; i < points.length; i++) {
+//            var d = chart_2_y[i];
+//            if (min_Temp < d < max_Temp) {   
+//                
+//            } 
+//            else {
+//                console.log(10);
+//                document.chart2.style.backgroundColor = 'red';
+//                //document.querySelector(".chart2").style.backgroundColor = 'red';
+//
+//            }
+//        }
+//    }
+//      alarm(chart_2_y);  
+    
+    // HER: Updated Method
+    // This method takes in points, chartClass, minAlarm, maxAlarmTemp 
+    // To alert the user when there's an out of range data point
+    function alarm(points, chartName, minAlarmTemp, maxAlarmTemp){
+        // grab the chart 2 from the page
+        var chart2 = document.querySelector(chartName);
+        
+        for (let k = 0; k < points.length; k++) {
+            var d = chart_2_y[k];
+            
+            // if d is less than the min temp 
+            // or d is greater than the max temp 
+            // change the background color of the chart to alert user...
+            if (d < minAlarmTemp || d > maxAlarmTemp) {   
+                chart2.classList.add("alarm_style");
+            } 
+            //... else return the chart color back to its original color value
+            else {
+                chart2.classList.remove("alarm_style");
 
-    function alarm(points) {
-        for (i = 0; i < points.length; i++) {
-            var d = chart_2_y[i];
-            if (min_Temp < d < max_Temp) {   
-            } else {
-                console.log(10);
-                document.chart2.style.backgroundColor = 'red';
             }
         }
     }
+    
+    alarm(chart_2_y, ".chart2", min_Temp, max_Temp);  
 
-     alarm(chart_2_y);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
     waitForElement();
+    SetDataOnPage(); // HER: Remove this if you want to add it to the monitors function
 });
