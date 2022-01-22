@@ -62,7 +62,6 @@ h1 {
 
 
 }
-
 /*Hear Rate Vital Monitor container*/
 .chart1{
   background-color: #222a2e;
@@ -198,7 +197,7 @@ h1 {
 }
 /* Resp Rate line graph */
 
-/*Shadding option under the graph
+/*Shadding option under the graph*/
 #poly-1 {
   fill: url(#gradient-1b);
 }
@@ -214,7 +213,7 @@ h1 {
 #poly-4 {
   fill: url(#gradient-4b);
 }
-Shadding option under the graphs*/
+/*Shadding option under the graphs*/
 
 
 @-moz-keyframes lineani {
@@ -270,11 +269,6 @@ Shadding option under the graphs*/
   position: relative;
 }
 
-.ChartOverall{
-  height: 300px;
-  width: 100%;
-}
-
 /* Changes grid size within monitor box*/
 .chart-line {
   width: 80%;
@@ -305,6 +299,22 @@ Shadding option under the graphs*/
 }
 .current-value.visible {
   opacity: 1;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 28px 0 0 28px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.triangle.red {
+  border-color: transparent transparent transparent #ef6670;
+}
+.triangle.green {
+  border-color: transparent transparent transparent #48c15e;
 }
 
 .horizontal,
